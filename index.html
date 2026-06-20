@@ -4,229 +4,89 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Baby Shower Edoardo</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
-
 <style>
-
+* { margin: 0; padding: 0; box-sizing: border-box; }
 body {
-  margin:0;
-  font-family:'Cormorant Garamond', serif;
-  color:white;
-  text-align:center;
-  background: radial-gradient(circle at bottom, #1b263b, #0d1b2a);
-  min-height:100vh;
-  padding:10px 0;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #0d1b2a, #1b263b);
+  color: white;
+  text-align: center;
+  min-height: 100vh;
+  padding: 20px;
+  overflow-x: hidden;
 }
-
-#intro {
-  position:fixed;
-  width:100%;
-  height:100%;
-  background:#0d1b2a;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:999;
-  font-size:24px;
-  animation: fadeOut 3s 2s forwards;
-}
-
-@keyframes fadeOut {
-  to {opacity:0; visibility:hidden;}
-}
-
-canvas {
-  position:fixed;
-  top:0;
-  left:0;
-  z-index:-1;
-}
-
 .container {
-  position:relative;
-  z-index:1;
-  padding:15px;
-  max-width:500px;
-  margin:0 auto;
-  animation: fadeIn 2s ease;
+  max-width: 500px;
+  margin: 0 auto;
+  background: rgba(0,0,0,0.3);
+  padding: 30px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
 }
-
-@keyframes fadeIn {
-  from {opacity:0; transform: translateY(30px);}
-  to {opacity:1; transform: translateY(0);}
+.emoji { font-size: 70px; margin: 20px 0; animation: float 3s ease-in-out infinite; }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+h1 { font-size: 40px; color: #ffd166; margin: 15px 0; }
+h2 { font-size: 18px; letter-spacing: 2px; margin: 10px 0; }
+.quote { font-style: italic; color: #e0e1dd; margin: 20px 0; font-size: 16px; }
+.info { margin: 10px 0; font-size: 14px; }
+#countdown { color: #ffd166; font-weight: bold; margin: 15px 0; font-size: 16px; }
+.button-container { margin: 30px 0; }
+a {
+  display: block;
+  margin: 12px auto;
+  padding: 12px;
+  width: 90%;
+  max-width: 300px;
+  background: #ffd166;
+  color: #0d1b2a;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: bold;
+  transition: 0.3s;
+  cursor: pointer;
 }
-
-.emoji-img {
-  font-size:80px;
-  animation:float 4s ease-in-out infinite;
-  display:block;
-  margin:10px auto;
-}
-
-@keyframes float {
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-15px)}
-}
-
-h1 {
-  font-size:36px;
-  color:#ffd166;
-  margin:8px 0;
-}
-
-h2 {
-  letter-spacing:3px;
-  margin:8px 0;
-  font-size:16px;
-}
-
-.quote {
-  margin:12px auto;
-  max-width:90%;
-  color:#e0e1dd;
-  font-style:italic;
-  font-size:13px;
-}
-
-.btn {
-  display:block;
-  margin:10px auto;
-  padding:10px;
-  width:85%;
-  max-width:250px;
-  border-radius:40px;
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(12px);
-  text-decoration:none;
-  color:white;
-  border:none;
-  font-family:'Cormorant Garamond', serif;
-  cursor:pointer;
-  transition:0.4s;
-  font-size:13px;
-}
-
-.btn:hover {
-  background:#ffd166;
-  color:#0d1b2a;
-  transform:scale(1.05);
-}
-
-#countdown {
-  color:#ffd166;
-  margin:8px;
-  font-size:13px;
-}
-
-p {
-  font-size:13px;
-  margin:6px 0;
-}
-
+a:hover { background: #ffed4e; transform: scale(1.05); }
+canvas { display: none; }
 </style>
 </head>
-
 <body>
 
-<div id="intro">✨ Cargando invitación… ✨</div>
-
-<canvas id="stars"></canvas>
-
-<audio autoplay loop muted>
-  <source src="https://cdn.pixabay.com/download/audio/2022/07/14/audio_8d8c28cf20.mp3" type="audio/mpeg">
-</audio>
-
 <div class="container">
-
-  <span class="emoji-img">👶</span>
-
+  <div class="emoji">👶</div>
+  
   <h2>✨ ESTÁS INVITADO ✨</h2>
   <h1>Baby Shower</h1>
   <h1>Edoardo</h1>
-
-  <p class="quote">
-  "Lo esencial está por llegar y nuestros corazones ya lo esperan con amor."
-  </p>
-
-  <p>📅 12 de septiembre del 2026</p>
-  <p>🕒 15:00 horas</p>
-
-  <div id="countdown"></div>
-
-  <a class="btn" href="https://maps.app.goo.gl/QeCuu6ML22GzdPev7" target="_blank">
-  📍 Ver ubicación
-  </a>
-
-  <a class="btn" href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/51966086" target="_blank">
-  🎁 Mesa de regalos
-  </a>
-
-  <p class="quote">
-  "Lo esencial es invisible a los ojos, pero visible en el corazón"
-  </p>
-
+  
+  <p class="quote">"Lo esencial está por llegar y nuestros corazones ya lo esperan con amor."</p>
+  
+  <div class="info">📅 12 de septiembre del 2026</div>
+  <div class="info">🕒 15:00 horas</div>
+  
+  <div id="countdown">⏳ Cargando...</div>
+  
+  <div class="button-container">
+    <a href="https://maps.app.goo.gl/QeCuu6ML22GzdPev7" target="_blank">📍 Ver ubicación</a>
+    <a href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/51966086" target="_blank">🎁 Mesa de regalos</a>
+  </div>
+  
+  <p class="quote">"Lo esencial es invisible a los ojos, pero visible en el corazón"</p>
 </div>
 
+<audio autoplay loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
 <script>
-
 let target = new Date("Sep 12, 2026 15:00:00").getTime();
-
-setInterval(()=>{
-  let now=new Date().getTime();
-  let diff=target-now;
-
-  let d=Math.floor(diff/(1000*60*60*24));
-  let h=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
-  let m=Math.floor((diff%(1000*60*60))/(1000*60));
-
-  document.getElementById("countdown").innerHTML =
-  `⏳ Faltan ${d} días ${h}h ${m}m`;
-},1000);
-
-const canvas = document.getElementById("stars");
-const ctx = canvas.getContext("2d");
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let stars=[];
-
-for(let i=0;i<150;i++){
-  stars.push({
-    x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
-    r:Math.random()*1.5,
-    s:Math.random()*0.7
-  });
-}
-
-function draw(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle="white";
-
-  stars.forEach(s=>{
-    ctx.beginPath();
-    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-    ctx.fill();
-
-    s.y+=s.s;
-    if(s.y>canvas.height) s.y=0;
-  });
-
-  requestAnimationFrame(draw);
-}
-
-draw();
-
-canvas.addEventListener("click", e=>{
-  for(let i=0;i<20;i++){
-    ctx.beginPath();
-    ctx.arc(e.clientX, e.clientY, Math.random()*3, 0, Math.PI*2);
-    ctx.fillStyle="gold";
-    ctx.fill();
-  }
-});
-
+setInterval(() => {
+  let now = new Date().getTime();
+  let diff = target - now;
+  let d = Math.floor(diff / (1000*60*60*24));
+  let h = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+  let m = Math.floor((diff % (1000*60*60)) / (1000*60));
+  document.getElementById("countdown").innerHTML = `⏳ Faltan ${d} días ${h}h ${m}m`;
+}, 1000);
 </script>
 
 </body>
