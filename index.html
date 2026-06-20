@@ -15,6 +15,10 @@ body {
   text-align:center;
   background: radial-gradient(circle at bottom, #1b263b, #0d1b2a);
   overflow:hidden;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
 /* Intro pantalla */
@@ -46,8 +50,14 @@ canvas {
 .container {
   position:relative;
   z-index:1;
-  padding:30px 20px;
+  padding:20px;
+  max-width:500px;
+  max-height:100vh;
+  overflow-y:auto;
   animation: fadeIn 2s ease;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
 }
 
 @keyframes fadeIn {
@@ -55,25 +65,50 @@ canvas {
   to {opacity:1; transform: translateY(0);}
 }
 
+/* imagen - PRIMERO */
+.img {
+  width:140px;
+  height:140px;
+  animation:float 4s ease-in-out infinite;
+  margin:0 auto 15px auto;
+  object-fit:contain;
+  order:-1;
+}
+
+@keyframes float {
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-15px)}
+}
+
 /* títulos */
-h1 {font-size:52px; color:#ffd166;}
-h2 {letter-spacing:3px;}
+h1 {
+  font-size:42px;
+  color:#ffd166;
+  margin:10px 0;
+}
+
+h2 {
+  letter-spacing:3px;
+  margin:10px 0;
+  font-size:18px;
+}
 
 /* frases */
 .quote {
-  margin:20px auto;
+  margin:15px auto;
   max-width:90%;
   color:#e0e1dd;
   font-style:italic;
+  font-size:14px;
 }
 
 /* botones */
 .btn {
   display:block;
-  margin:15px auto;
-  padding:15px;
+  margin:12px auto;
+  padding:12px;
   width:85%;
-  max-width:320px;
+  max-width:280px;
   border-radius:40px;
   background: rgba(255,255,255,0.1);
   backdrop-filter: blur(12px);
@@ -83,7 +118,7 @@ h2 {letter-spacing:3px;}
   font-family:'Cormorant Garamond', serif;
   cursor:pointer;
   transition:0.4s;
-  font-size:16px;
+  font-size:14px;
 }
 
 .btn:hover {
@@ -95,19 +130,28 @@ h2 {letter-spacing:3px;}
 /* contador */
 #countdown {
   color:#ffd166;
-  margin:15px;
-  font-size:18px;
+  margin:10px;
+  font-size:14px;
 }
 
-/* imagen */
-.img {
-  width:120px;
-  animation:float 4s ease-in-out infinite;
+/* detalles */
+p {
+  font-size:14px;
+  margin:8px 0;
 }
 
-@keyframes float {
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-15px)}
+/* scroll personalizado */
+.container::-webkit-scrollbar {
+  width:6px;
+}
+
+.container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background:#ffd166;
+  border-radius:3px;
 }
 
 </style>
@@ -125,14 +169,14 @@ h2 {letter-spacing:3px;}
 
 <div class="container">
 
-  <img src="https://i.imgur.com/6XQwF9V.png" class="img" alt="Baby Shower">
+  <img src="https://i.imgur.com/K8Z5pF3.png" class="img" alt="El Principito Bebé">
 
   <h2>✨ ESTÁS INVITADO ✨</h2>
-  <h1>Baby Shower de</h1>
+  <h1>Baby Shower</h1>
   <h1>Edoardo</h1>
 
   <p class="quote">
-  "En mi corazón vivirás, siempre estarás aquí."
+  "Lo esencial está por llegar y nuestros corazones ya lo esperan con amor."
   </p>
 
   <p>📅 12 de septiembre del 2026</p>
