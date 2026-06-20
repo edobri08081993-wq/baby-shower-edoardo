@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baby Shower Edoardo</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+
+body {
+  margin:0;
+  font-family:'Cormorant Garamond', serif;
+  color:white;
+  text-align:center;
+  background: radial-gradient(circle at bottom, #1b263b, #0d1b2a);
+  overflow:hidden;
+}
+
+/* Intro pantalla */
+#intro {
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:#0d1b2a;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+  font-size:24px;
+  animation: fadeOut 3s 2s forwards;
+}
+
+@keyframes fadeOut {
+  to {opacity:0; visibility:hidden;}
+}
+
+/* Canvas estrellas */
+canvas {
+  position:fixed;
+  top:0;
+  left:0;
+}
+
+/* contenedor */
+.container {
+  position:relative;
+  z-index:1;
+  padding:30px 20px;
+  animation: fadeIn 2s ease;
+}
+
+@keyframes fadeIn {
+  from {opacity:0; transform: translateY(30px);}
+  to {opacity:1; transform: translateY(0);}
+}
+
+/* títulos */
+h1 {font-size:52px; color:#ffd166;}
+h2 {letter-spacing:3px;}
+
+/* frases */
+.quote {
+  margin:20px auto;
+  max-width:90%;
+  color:#e0e1dd;
+  font-style:italic;
+}
+
+/* botones */
+.btn {
+  display:block;
+  margin:15px auto;
+  padding:15px;
+  width:85%;
+  max-width:320px;
+  border-radius:40px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(12px);
+  text-decoration:none;
+  color:white;
+  border:none;
+  font-family:'Cormorant Garamond', serif;
+  cursor:pointer;
+  transition:0.4s;
+  font-size:16px;
+}
+
+.btn:hover {
+  background:#ffd166;
+  color:#0d1b2a;
+  transform:scale(1.08);
+}
+
+/* contador */
+#countdown {
+  color:#ffd166;
+  margin:15px;
+  font-size:18px;
+}
+
+/* imagen */
+.img {
+  width:120px;
+  animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-15px)}
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="intro">✨ Cargando invitación… ✨</div>
+
+<canvas id="stars"></canvas>
+
+<audio id="music" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2024/03/20/audio_d8c9e3f8b2.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+
+  <img src="https://i.imgur.com/6XQwF9V.png" class="img" alt="Baby Shower">
+
+  <h2>✨ ESTÁS INVITADO ✨</h2>
+  <h1>Baby Shower de</h1>
+  <h1>Edoardo</h1>
+
+  <p class="quote">
+  "En mi corazón vivirás, siempre estarás aquí."
+  </p>
+
+  <p>📅 12 de septiembre del 2026</p>
+  <p>🕒 15:00 horas</p>
+
+  <div id="countdown"></div>
+
+  <a class="btn" href="https://maps.app.goo.gl/QeCuu6ML22GzdPev7" target="_blank">
+  📍 Ver ubicación
+  </a>
+
+  <a class="btn" href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/51966086" target="_blank">
+  🎁 Mesa de regalos
+  </a>
+
+  <a class="btn" href="https://wa.me/?text=Confirmo%20asistencia%20al%20Baby%20Shower%20de%20Edoardo" target="_blank">
+  ✅ Confirmar asistencia
+  </a>
+
+  <button class="btn" onclick="toggleMusic()">
+  🎵 Activar música
+  </button>
+
+  <p class="quote">
+  "Lo esencial es invisible a los ojos, pero visible en el corazón"
+  </p>
+
+</div>
+
+<script>
+
+/* COUNTDOWN */
+let target = new Date("Sep 12, 2026 15:00:00").getTime();
+
+setInterval(()=>{
+  let now=new Date().getTime();
+  let diff=target-now;
+
+  let d=Math.floor(diff/(1000*60*60*24));
+  let h=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+  let m=Math.floor((diff%(1000*60*60))/(1000*60));
+
+  document.getElementById("countdown").innerHTML =
+  `⏳ Faltan ${d} días ${h}h ${m}m`;
+},1000);
+
+/* ESTRELLAS INTERACTIVAS */
+const canvas = document.getElementById("stars");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let stars=[];
+
+for(let i=0;i<150;i++){
+  stars.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    r:Math.random()*1.5,
+    s:Math.random()*0.7
+  });
+}
+
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle="white";
+
+  stars.forEach(s=>{
+    ctx.beginPath();
+    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fill();
+
+    s.y+=s.s;
+    if(s.y>canvas.height) s.y=0;
+  });
+
+  requestAnimationFrame(draw);
+}
+
+draw();
+
+/* EXPLOSIÓN AL CLICK */
+canvas.addEventListener("click", e=>{
+  for(let i=0;i<20;i++){
+    ctx.beginPath();
+    ctx.arc(e.clientX, e.clientY, Math.random()*3, 0, Math.PI*2);
+    ctx.fillStyle="gold";
+    ctx.fill();
+  }
+});
+
+/* CONTROL DE MÚSICA */
+let isPlaying = false;
+function toggleMusic(){
+  const audio = document.getElementById('music');
+  if(isPlaying){
+    audio.pause();
+    isPlaying = false;
+  } else {
+    audio.play();
+    isPlaying = true;
+  }
+}
+
+</script>
+
+</body>
+</html>
